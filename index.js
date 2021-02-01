@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 // Connects to MongoDB and starts express server
 const init = async() => {
-    await mongoose.connect(settings.dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true })
+    await mongoose.connect(settings.dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
 
     const server = express();
 

@@ -1,4 +1,3 @@
-//const ddbbConnection = require('./ddbb');
 var Shop = require('../model/shop');
 
 /**
@@ -18,7 +17,7 @@ module.exports.insertShop = function(name, location, nonCommentable, callback) {
 /**
  * Returns the list of shops
  */
-module.exports.getShops = function() {
+module.exports.getShops = function(callback) {
     Shop.find(function(error, shops) {
         if (error) callback(error);
         callback(null, shops);
@@ -32,9 +31,35 @@ module.exports.getShops = function() {
  * @param {*} callback error, user found
  */
 module.exports.findByName = function(name, callback) {
-    User.findOne({ name: name }, function(error, user) {
+    Shop.findOne({ name: name }, function(error, shop) {
         if (error) callback(error);
-        callback(null, user);
+        callback(null, shop);
+    });
+}
+
+/**
+ * Return a single user that matchs the id provided
+ * @param {*} id 
+ * @param {*} callback error, user found
+ */
+module.exports.findById = function(id, callback) {
+    Shop.findOne({ _id: id }, function(error, shop) {
+        if (error) callback(error);
+        callback(null, shop);
+    });
+}
+
+/**
+ * Update a shop by inserting a comment
+ * @param {*} shopName
+ * @param {*} userName
+ * @param {*} comment 
+ * @param {*} callback error
+ */
+module.exports.insertComment = function(shopName, userName, comment, callback) {
+    Shop.findOneAndUpdate({ _id: shopName }, { $push: { comments: { user: userName, comment: comment } } }, function(error, shop) {
+        if (error) callback(error);
+        callback(null, shop);
     });
 }
 

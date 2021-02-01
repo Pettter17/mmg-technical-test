@@ -1,4 +1,3 @@
-//const ddbbConnection = require('./ddbb');
 var User = require('../model/user');
 
 /**
@@ -15,16 +14,6 @@ module.exports.insertUser = function(name, password, role, callback) {
     });
 };
 
-/**
- * Returns the list of users
- */
-module.exports.getUsers = function() {
-    User.find(function(error, users) {
-        if (error) callback(error);
-        callback(null, users);
-    });
-};
-
 
 /**
  * Return a single user that matchs the name provided
@@ -35,6 +24,22 @@ module.exports.findByName = function(name, callback) {
     User.findOne({ name: name }, function(error, user) {
         if (error) callback(error);
         callback(null, user);
+    });
+}
+
+/**
+ * Returns true if user is admin, elsewhere false
+ * @param {*} username Name of user
+ * @param {*} callback error, isAdmin boolean
+ */
+module.exports.isAdminUser = function(username, callback) {
+    let isAdmin = false;
+    this.findByName(username, (error, user) => {
+        if (error) callback(error);
+        if (user && user.role == 1) {
+            isAdmin = true;
+        }
+        callback(null, isAdmin);
     });
 }
 

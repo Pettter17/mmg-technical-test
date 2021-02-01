@@ -11,13 +11,12 @@ var commentSchema = new Schema({
         type: String,
         required: true
     }
-});
+}, { _id: false });
 
 // Schema for shops
 var shopSchema = new Schema({
     name: {
         type: String,
-        unique: true,
         required: true
     },
     location: {

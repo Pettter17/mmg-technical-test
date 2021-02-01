@@ -62,8 +62,13 @@ module.exports = function(app) {
      * Gets the information of all the coffee shops.
      */
     app.get('/shops', function(req, res) {
-        // TODO
-        res.send("Wello world");
+        shopDAO.getShops((error, shops) => {
+            if (error) {
+                res.status(500).send("Error retrieving the shop")
+            } else {
+                res.status(200).send({ shops: shops });
+            }
+        })
     });
 
     /**
@@ -71,17 +76,58 @@ module.exports = function(app) {
      * Gets the information of the given cofee shop
      */
     app.get('/shops/:shopid', function(req, res) {
-        // TODO
-        res.send("Wello world");
+        shopDAO.findById(req.params.shopid, (error, shop) => {
+            if (error) {
+                res.status(500).send("Error retrieving the shop")
+            } else if (shop) {
+                res.status(200).send(shop);
+            } else {
+                res.status(200).send({});
+            }
+        })
     });
 
     /**
-     * PUT /shops/:shopid/comment
+     * POST /shops/:shopid/comment
      * Adds a comment to the given shopid coffee shop
      */
     app.put('/shops/:shopid/comment', function(req, res) {
-        // TODO
-        res.send("Wello world");
+        if (req && req != {} && typeof req.body.comment == "string" && req.params.shopid) {
+            shopDAO.findById(req.params.shopid, (error, shop) => {
+                if (error) {
+                    res.status(500).send("Error retrieving the shop")
+                } else if (shop && !shop.nonCommentable) {
+                    const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+                    const login = Buffer.from(b64auth, 'base64').toString().split(':')[0]
+                        // Any user can comment
+                    shopDAO.insertComment(shop._id, login, req.body.comment, (error, updatedShop) => {
+                        if (error) res.status(500).send("Error inserting comment");
+                        else res.status(200).send(updatedShop);
+                    })
+                } else if (shop && shop.nonCommentable) {
+                    // Only admins can comment
+                    const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+                    const login = Buffer.from(b64auth, 'base64').toString().split(':')[0]
+                    userDAO.isAdminUser(login, (error, isAdmin) => {
+                        if (error) {
+                            res.status(500).send("Error retrieving the user");
+                        } else if (isAdmin) {
+                            // Comment
+                            shopDAO.insertComment(shop._id, login, req.body.comment, (error, updatedShop) => {
+                                if (error) res.status(500).send("Error inserting comment");
+                                else res.status(200).send(updatedShop);
+                            })
+                        } else {
+                            res.status(401).send("You can't comment to a non-commentable shop");
+                        }
+                    });
+                } else {
+                    res.status(400).send("Shop does not exists");
+                }
+            })
+        } else {
+            res.status(400).send("Bad request");
+        }
     });
 
 }
