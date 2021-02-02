@@ -8,6 +8,12 @@ All the users and shops data are stored and retrieved from a [MongoDB database](
 ## API Documentation
 All the API endpoints require Basic Authentication, so you will nedd to use an already registered user to successfully request them (that's the reason you have to create your first user when seting up this code on your custom environment).
 
+The returned API status codes can be:
+- 401: Missing or invalid authentication
+- 200: Execution has succeeded
+- 400: Request has invalid parameters
+- 500: Server error (hopefully this only happens when doing weird things, like trying to insert two users with the same name, as it is not allowed)
+
 The API exposes the following methods:
 #### POST /users
 This endpoint creates an user. Request body should have the following JSON properties
