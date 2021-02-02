@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "0e143e6b-ac51-4a30-a50f-598caedfe1b7",
+		"name": "MMG-TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pepe\",\r\n    \"password\": \"MySecurePass?12.\",\r\n    \"role\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-endpoint}}users",
+					"host": [
+						"{{api-endpoint}}users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Shops",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"The italian cofee\",\r\n    \"location\": \"Rome street, 42\",\r\n    \"nonCommentable\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-endpoint}}shops",
+					"host": [
+						"{{api-endpoint}}shops"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all shops",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-endpoint}}shops",
+					"host": [
+						"{{api-endpoint}}shops"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a shop by Id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-endpoint}}shops/6019a55826290c00152e544b",
+					"host": [
+						"{{api-endpoint}}shops"
+					],
+					"path": [
+						"6019a55826290c00152e544b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertComment - AdminUser - CommentableShop",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"the best place in the world\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-endpoint}}shops/6019a55826290c00152e544b/comment",
+					"host": [
+						"{{api-endpoint}}shops"
+					],
+					"path": [
+						"6019a55826290c00152e544b",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertComment - ClientUser - CommentableShop",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "client",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"the best place in the world\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-endpoint}}shops/6019a55826290c00152e544b/comment",
+					"host": [
+						"{{api-endpoint}}shops"
+					],
+					"path": [
+						"6019a55826290c00152e544b",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertComment - AdminUser - NonCommentableShop",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"the best place in the world\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-endpoint}}shops/6019a6d826290c00152e544d/comment",
+					"host": [
+						"{{api-endpoint}}shops"
+					],
+					"path": [
+						"6019a6d826290c00152e544d",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertComment - ClientUser - NonCommentableShop",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "client",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"comment\": \"the best place in the world\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-endpoint}}shops/6019a6d826290c00152e544d/comment",
+					"host": [
+						"{{api-endpoint}}shops"
+					],
+					"path": [
+						"6019a6d826290c00152e544d",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "api-endpoint",
+			"value": "https://medlabmg-test.herokuapp.com/"
+		}
+	]
+}
