@@ -41,7 +41,7 @@ This endpoint inserts a new comment on the given shop (if the shop is commentabl
 ```
 
 ### Try it out!!
-This project has been deployed in [Heroku](https://www.heroku.com/) using a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) as the underlying database and you can test this instance by using the provided [Postman Collection]((MMG-TEST.postman_collection.json)).
+This project has been deployed in [Heroku](https://www.heroku.com/) using a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) as the underlying database and you can test this instance by using the provided [Postman Collection](MMG-TEST.postman_collection.json).
 
 Note that 2 users are already created: admin/admin and client/client (name/password, respectively). Also, there's already 2 shops created to test the different behaviors, one as *non-commentable*, and the other as *commentable*
 
