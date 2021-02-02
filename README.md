@@ -1,15 +1,15 @@
 # mmg-technical-test
 Project for the technical test at MMG.
 
-### Architecture
+## Architecture
 This project uses [Express framework](https://expressjs.com/) to expose a REST API for the manadgement of different users and coffe shops. 
 All the users and shops data are stored and retrieved from a [MongoDB database](https://www.mongodb.com/) and, as the testing framework, [Jest](https://jestjs.io/) is being used (minimum tests).
 
-### API Documentation
+## API Documentation
 All the API endpoints require Basic Authentication, so you will nedd to use an already registered user to successfully request them (that's the reason you have to create your first user when seting up this code on your custom environment).
 
 The API exposes the following methods:
-###### POST /users
+#### POST /users
 This endpoint creates an user. Request body should have the following JSON properties
 ```javascript
 { "name": "userName", // String, unique, required
@@ -18,7 +18,7 @@ This endpoint creates an user. Request body should have the following JSON prope
 }
 ```
 
-###### POST /shops
+#### POST /shops
 This endpoint creates a shop. Request body should have the following JSON properties
 ```javascript
 { "name": "shopName", // String, required
@@ -27,25 +27,25 @@ This endpoint creates a shop. Request body should have the following JSON proper
 }
 ```
 
-###### GET /shops
+#### GET /shops
 Returns all shops
 
-###### GET /shops/:shopid
+#### GET /shops/:shopid
 Returns the given :shopid shop. This is can be taken from the _id field of the GET /shops request
 
-###### PUT /shops/:shopid/comment
+#### PUT /shops/:shopid/comment
 This endpoint inserts a new comment on the given shop (if the shop is commentable, or the user has the right permissions to do it on a non-commentable shop). The body should have the comment property
 ```javascript
 { "comment": "This shop is cheap!" // String, required
 }
 ```
 
-### Try it out!!
+## Try it out!!
 This project has been deployed in [Heroku](https://www.heroku.com/) using a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) as the underlying database and you can test this instance by using the provided [Postman Collection](MMG-TEST.postman_collection.json).
 
 Note that 2 users are already created: admin/admin and client/client (name/password, respectively). Also, there's already 2 shops created to test the different behaviors, one as *non-commentable*, and the other as *commentable*
 
-### Deploy and Set Up
+## Deploy and Set Up
 If you wish to configure this project in your development environment follow these steps: 
 1. Clone the repo
 2. Create a new MongoDB Database
