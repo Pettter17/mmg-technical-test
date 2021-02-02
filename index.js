@@ -1,7 +1,7 @@
 "use strict";
 
 const settings = require("./settings");
-const express = require("express");
+const server = require("./app");
 const mongoose = require("mongoose");
 const routes = require("./src/routes");
 var bodyParser = require('body-parser');
@@ -9,12 +9,6 @@ var bodyParser = require('body-parser');
 // Connects to MongoDB and starts express server
 const init = async() => {
     await mongoose.connect(settings.dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
-
-    const server = express();
-
-    server.use(bodyParser.json());
-
-    routes(server);
 
     await server.listen(settings.port, () => {
         console.log(`Express server listening on port ${settings.port}`);
@@ -36,3 +30,5 @@ process.on("unhandledRejection", err => {
 });
 
 init();
+
+module.exports = server;

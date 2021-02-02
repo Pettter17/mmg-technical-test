@@ -1,1 +1,0 @@
-mongodb+srv://admin:<password>@mmgtest.jo17p.mongodb.net/<dbname>?retryWrites=true&w=majority
